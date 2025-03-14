@@ -1,0 +1,61 @@
+import java.util.ArrayList;  
+import java.util.Scanner;  
+
+public class StudentGradeTracker {  
+    public static void main(String[] args) {  
+        ArrayList<Double> grades = new ArrayList<Double>();  
+        Scanner scanner = new Scanner(System.in);  
+        String input;  
+
+ 
+        System.out.println("Enter student grades (or type 'done' to finish):");  
+
+        while (true) {  
+            input = scanner.nextLine();  
+
+            if (input.equalsIgnoreCase("done")) {  
+                break;  
+            }  
+
+            try {  
+                double grade = Double.parseDouble(input);  
+                if (grade < 0 || grade > 100) {  
+                    System.out.println("Please enter a valid grade between 0 and 100.");  
+                } else {  
+                    grades.add(grade);  
+                    System.out.println("Grade entered: " + grade);  
+                }  
+            } catch (NumberFormatException e) {  
+                System.out.println("Invalid input. Please enter a numeric value or 'done' to finish.");  
+            }  
+        }  
+
+        if (grades.isEmpty()) {  
+            System.out.println("No grades were entered.");  
+        } else {  
+            double sum = 0.0;  
+            double highest = grades.get(0);  
+            double lowest = grades.get(0);  
+
+            for (double grade : grades) {  
+                sum += grade;  
+
+                if (grade > highest) {  
+                    highest = grade;  
+                }  
+                if (grade < lowest) {  
+                    lowest = grade;  
+                }  
+            }  
+
+            double average = sum / grades.size();  
+
+            // Displaying results  
+            System.out.printf("Average score: %.2f%n", average);  
+            System.out.printf("Highest score: %.2f%n", highest);  
+            System.out.printf("Lowest score: %.2f%n", lowest);  
+        }  
+
+        scanner.close();  
+    }  
+}
